@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
     :root {
-      --bg: #0b0f1a;
-      --panel: #111827;
-      --panel2: #0f172a;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --primary: #7c3aed;
-      --primary2: #a855f7;
+      --bg: #070A12;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.04);
+      --text: #EAF0FF;
+      --muted: rgba(234,240,255,0.7);
+      --primary: #7C3AED;
+      --secondary: #22D3EE;
     }
 
     * {
@@ -21,88 +23,132 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: "Inter", sans-serif;
       background: radial-gradient(circle at top, #111827, var(--bg));
       color: var(--text);
+      overflow-x: hidden;
     }
 
-    /* LANDING */
+    /* ===== BACKGROUND GLOW ANIMATION ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 60%);
+      filter: blur(60px);
+      animation: floatGlow 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(34,211,238,0.20), transparent 60%);
+      filter: blur(70px);
+      animation: floatGlow 7s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translateY(0px); opacity: 0.6; }
+      50% { transform: translateY(-10px); opacity: 1; }
+      100% { transform: translateY(0px); opacity: 0.6; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== LANDING ===== */
     .hero {
       text-align: center;
       padding: 120px 20px 60px;
+      animation: fadeIn 1s ease-out;
     }
 
     .badge {
       display: inline-block;
       padding: 6px 12px;
-      border-radius: 20px;
-      background: rgba(124, 58, 237, 0.15);
-      color: var(--primary2);
+      border-radius: 999px;
+      background: rgba(124,58,237,0.15);
+      color: #c4b5fd;
       font-size: 12px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 56px;
+      font-size: 64px;
       margin: 10px 0;
-      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      background: linear-gradient(90deg, #7C3AED, #22D3EE);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
-      color: var(--muted);
       font-size: 18px;
-      line-height: 1.5;
+      color: var(--muted);
+      line-height: 1.6;
     }
 
     .btn {
-      margin-top: 25px;
       padding: 14px 22px;
-      background: linear-gradient(90deg, var(--primary), var(--primary2));
+      border-radius: 14px;
       border: none;
-      color: white;
-      border-radius: 12px;
       cursor: pointer;
-      font-size: 16px;
-      transition: 0.2s;
+      font-weight: 600;
+      font-size: 15px;
+      color: white;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: 0.2s ease;
+      margin-top: 25px;
     }
 
     .btn:hover {
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(124,58,237,0.3);
     }
 
-    /* PRICING */
-    .pricing {
+    /* ===== FEATURES ===== */
+    .section {
       padding: 60px 20px;
       text-align: center;
     }
 
-    .pricing h2 {
-      color: var(--text);
-      margin-bottom: 20px;
-    }
-
-    .cards {
-      display: flex;
-      justify-content: center;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
+      max-width: 900px;
+      margin: auto;
     }
 
     .card {
-      background: var(--panel);
       padding: 20px;
-      border-radius: 16px;
-      width: 240px;
-      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 18px;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      transition: 0.2s ease;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
     }
 
     .card h3 {
-      margin-bottom: 10px;
-      color: var(--primary2);
+      margin: 0 0 10px;
+      color: #c4b5fd;
     }
 
     .card p {
@@ -110,33 +156,29 @@
       font-size: 14px;
     }
 
-    .pro {
-      border: 1px solid rgba(124,58,237,0.5);
-      transform: scale(1.05);
-    }
-
-    /* CHAT */
+    /* ===== CHAT ===== */
     #chatPage {
       display: none;
       height: 100vh;
       flex-direction: column;
-      background: var(--bg);
     }
 
     .topbar {
-      padding: 15px 20px;
-      background: var(--panel);
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .logo {
-      font-weight: bold;
-      color: var(--primary2);
+      font-weight: 700;
+      color: #c4b5fd;
     }
 
-    .chatContainer {
+    .chatWrapper {
       flex: 1;
       display: flex;
       justify-content: center;
@@ -145,7 +187,7 @@
 
     .chatBox {
       width: 100%;
-      max-width: 800px;
+      max-width: 850px;
       display: flex;
       flex-direction: column;
     }
@@ -153,24 +195,21 @@
     #chat {
       flex: 1;
       background: var(--panel);
-      border-radius: 16px;
-      padding: 15px;
+      border-radius: 18px;
+      padding: 16px;
       overflow-y: auto;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
     }
 
     .msg {
       margin: 10px 0;
-      line-height: 1.4;
+      line-height: 1.5;
+      animation: fadeIn 0.2s ease-out;
     }
 
-    .user {
-      color: #60a5fa;
-    }
-
-    .ai {
-      color: #c084fc;
-    }
+    .user { color: #60a5fa; }
+    .ai { color: #c084fc; }
 
     .inputArea {
       display: flex;
@@ -180,21 +219,23 @@
     input {
       flex: 1;
       padding: 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
       outline: none;
       background: var(--panel2);
       color: white;
+      font-size: 14px;
     }
 
     button {
       margin-left: 10px;
       padding: 14px 18px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
-      background: linear-gradient(90deg, var(--primary), var(--primary2));
-      color: white;
       cursor: pointer;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
 
   </style>
@@ -207,30 +248,33 @@
 
   <div class="hero">
     <div class="badge">AI Study & Career Copilot</div>
+
     <h1>Skilio</h1>
+
     <p class="subtitle">
-      Your intelligent study companion that helps you learn faster, revise smarter, and plan your future with AI-powered guidance.
+      Learn faster, revise smarter, and unlock your potential with an AI-powered study companion built for students.
     </p>
-    <button class="btn" onclick="start()">Start Learning</button>
+
+    <button class="btn" onclick="start()">Start Learning Free</button>
   </div>
 
-  <div class="pricing">
-    <h2>Simple Pricing</h2>
+  <div class="section">
+    <h2>Why Skilio?</h2>
 
-    <div class="cards">
+    <div class="grid">
       <div class="card">
-        <h3>Free</h3>
-        <p>Basic AI help + study modes</p>
-      </div>
-
-      <div class="card pro">
-        <h3>Pro</h3>
-        <p>Advanced AI + exam tools</p>
+        <h3>🧠 AI Tutor</h3>
+        <p>Explain anything in simple steps instantly.</p>
       </div>
 
       <div class="card">
-        <h3>Premium</h3>
-        <p>Full AI + career assistant</p>
+        <h3>📚 Study Modes</h3>
+        <p>Quiz, flashcards, and exam prep tools.</p>
+      </div>
+
+      <div class="card">
+        <h3>🚀 Career AI</h3>
+        <p>Discover what you should learn next.</p>
       </div>
     </div>
   </div>
@@ -241,11 +285,11 @@
 <div id="chatPage">
 
   <div class="topbar">
-    <div class="logo">Skilio</div>
-    <div>AI Study Copilot</div>
+    <div class="logo">Skilio AI</div>
+    <div style="opacity:0.6;">Your Study Companion</div>
   </div>
 
-  <div class="chatContainer">
+  <div class="chatWrapper">
     <div class="chatBox">
 
       <div id="chat"></div>
@@ -276,7 +320,8 @@ async function send() {
 
   document.getElementById("input").value = "";
 
-  chat.innerHTML += `<div class="msg ai">Skilio: thinking...</div>`;
+  let typingId = "t" + Date.now();
+  chat.innerHTML += `<div class="msg ai" id="${typingId}">Skilio is thinking...</div>`;
 
   const res = await fetch("/api/chat", {
     method: "POST",
@@ -286,7 +331,9 @@ async function send() {
 
   const data = await res.json();
 
-  chat.innerHTML += `<div class="msg ai">Skilio: ${data.reply}</div>`;
+  document.getElementById(typingId).innerHTML =
+    "Skilio: " + data.reply;
+
   chat.scrollTop = chat.scrollHeight;
 }
 </script>
