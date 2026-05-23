@@ -5,6 +5,10 @@ const openai = new OpenAI({
 });
 
 export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return res.status(405).json({ reply: "Method not allowed" });
+  }
+
   try {
     const { message } = req.body;
 
@@ -13,8 +17,7 @@ export default async function handler(req, res) {
       messages: [
         {
           role: "system",
-          content:
-            "You are Skilio, a helpful AI tutor for students. Explain clearly, step-by-step, in simple language."
+          content: "You are Skilio, a helpful and simple student tutor."
         },
         {
           role: "user",
@@ -23,13 +26,15 @@ export default async function handler(req, res) {
       ],
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       reply: completion.choices[0].message.content
     });
 
   } catch (error) {
-    res.status(500).json({
-      reply: "Error connecting to AI."
+    console.error(error);
+
+    return res.status(500).json({
+      reply: "AI error: " + (error.message || "unknown error")
     });
   }
 }
