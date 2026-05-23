@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Skilio AI</title>
+
+  <style>
+    body {
+      background: #0b0f1a;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding-top: 70px;
+    }
+
+    h1 { color: #7c3aed; }
+
+    input {
+      padding: 10px;
+      width: 260px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-left: 5px;
+      border-radius: 8px;
+      border: none;
+      background: #7c3aed;
+      color: white;
+      cursor: pointer;
+    }
+
+    #output {
+      margin-top: 30px;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Skilio AI 🚀</h1>
+
+<input id="userInput" placeholder="Ask anything..." />
+<button onclick="askAI()">Send</button>
+
+<div id="output"></div>
+
+<script>
+async function askAI() {
+  let text = document.getElementById("userInput").value;
+  let output = document.getElementById("output");
+
+  if (!text) return;
+
+  output.innerHTML = "Thinking... 🤔";
+
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: text })
+  });
