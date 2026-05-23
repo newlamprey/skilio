@@ -10,84 +10,32 @@
     :root {
       --bg: #070A12;
       --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(255,255,255,0.04);
       --text: #EAF0FF;
       --muted: rgba(234,240,255,0.7);
       --primary: #7C3AED;
       --secondary: #22D3EE;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: "Inter", sans-serif;
       background: radial-gradient(circle at top, #111827, var(--bg));
       color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* ===== BACKGROUND GLOW ANIMATION ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      top: -200px;
-      left: -200px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(124,58,237,0.25), transparent 60%);
-      filter: blur(60px);
-      animation: floatGlow 6s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      bottom: -200px;
-      right: -200px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(34,211,238,0.20), transparent 60%);
-      filter: blur(70px);
-      animation: floatGlow 7s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes floatGlow {
-      0% { transform: translateY(0px); opacity: 0.6; }
-      50% { transform: translateY(-10px); opacity: 1; }
-      100% { transform: translateY(0px); opacity: 0.6; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ===== LANDING ===== */
     .hero {
       text-align: center;
-      padding: 120px 20px 60px;
-      animation: fadeIn 1s ease-out;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(124,58,237,0.15);
-      color: #c4b5fd;
-      font-size: 12px;
-      margin-bottom: 20px;
+      padding: 100px 20px 40px;
+      animation: fadeIn 1s ease;
     }
 
     h1 {
-      font-size: 64px;
+      font-size: 60px;
       margin: 10px 0;
-      background: linear-gradient(90deg, #7C3AED, #22D3EE);
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -95,65 +43,50 @@
     .subtitle {
       max-width: 700px;
       margin: auto;
-      font-size: 18px;
       color: var(--muted);
+      font-size: 18px;
       line-height: 1.6;
     }
 
     .btn {
-      padding: 14px 22px;
-      border-radius: 14px;
+      margin-top: 20px;
+      padding: 14px 20px;
       border: none;
+      border-radius: 12px;
       cursor: pointer;
-      font-weight: 600;
-      font-size: 15px;
-      color: white;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
-      transition: 0.2s ease;
-      margin-top: 25px;
+      color: white;
+      font-weight: 600;
+      transition: 0.2s;
     }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(124,58,237,0.3);
-    }
+    .btn:hover { transform: translateY(-3px); }
 
-    /* ===== FEATURES ===== */
-    .section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
+    /* FEATURES */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+      gap: 15px;
       max-width: 900px;
-      margin: auto;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
     .card {
-      padding: 20px;
-      border-radius: 18px;
       background: var(--panel);
+      padding: 16px;
+      border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      transition: 0.2s ease;
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
     }
 
     .card h3 {
-      margin: 0 0 10px;
       color: #c4b5fd;
+      margin-bottom: 6px;
     }
 
     .card p {
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
     }
 
     /* ===== CHAT ===== */
@@ -164,12 +97,10 @@
     }
 
     .topbar {
-      padding: 14px 20px;
+      padding: 12px 18px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
@@ -178,11 +109,32 @@
       color: #c4b5fd;
     }
 
+    .modes {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mode {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .mode:hover {
+      background: rgba(124,58,237,0.2);
+    }
+
     .chatWrapper {
       flex: 1;
       display: flex;
       justify-content: center;
-      padding: 20px;
+      padding: 10px;
     }
 
     .chatBox {
@@ -195,17 +147,15 @@
     #chat {
       flex: 1;
       background: var(--panel);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 14px;
       overflow-y: auto;
-      border: 1px solid rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
     }
 
     .msg {
-      margin: 10px 0;
+      margin: 8px 0;
+      animation: fadeIn 0.2s ease;
       line-height: 1.5;
-      animation: fadeIn 0.2s ease-out;
     }
 
     .user { color: #60a5fa; }
@@ -213,31 +163,33 @@
 
     .inputArea {
       display: flex;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
     input {
       flex: 1;
       padding: 14px;
-      border-radius: 14px;
+      border-radius: 12px;
       border: none;
       outline: none;
-      background: var(--panel2);
+      background: rgba(255,255,255,0.05);
       color: white;
-      font-size: 14px;
     }
 
     button {
-      margin-left: 10px;
+      margin-left: 8px;
       padding: 14px 18px;
-      border-radius: 14px;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
-      font-weight: 600;
-      color: white;
       background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
@@ -247,35 +199,29 @@
 <div id="landing">
 
   <div class="hero">
-    <div class="badge">AI Study & Career Copilot</div>
-
     <h1>Skilio</h1>
-
     <p class="subtitle">
-      Learn faster, revise smarter, and unlock your potential with an AI-powered study companion built for students.
+      AI-powered learning system that helps you study smarter, revise faster, and understand anything instantly.
     </p>
-
-    <button class="btn" onclick="start()">Start Learning Free</button>
+    <button class="btn" onclick="start()">Start Learning</button>
   </div>
 
-  <div class="section">
-    <h2>Why Skilio?</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>🧠 AI Tutor</h3>
-        <p>Explain anything in simple steps instantly.</p>
-      </div>
-
-      <div class="card">
-        <h3>📚 Study Modes</h3>
-        <p>Quiz, flashcards, and exam prep tools.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚀 Career AI</h3>
-        <p>Discover what you should learn next.</p>
-      </div>
+  <div class="grid">
+    <div class="card">
+      <h3>🧠 Explain</h3>
+      <p>Break down any topic simply</p>
+    </div>
+    <div class="card">
+      <h3>🧪 Quiz</h3>
+      <p>Test your knowledge instantly</p>
+    </div>
+    <div class="card">
+      <h3>🧠 Flashcards</h3>
+      <p>Memorize faster</p>
+    </div>
+    <div class="card">
+      <h3>🎯 Exam Mode</h3>
+      <p>Focused revision help</p>
     </div>
   </div>
 
@@ -286,7 +232,14 @@
 
   <div class="topbar">
     <div class="logo">Skilio AI</div>
-    <div style="opacity:0.6;">Your Study Companion</div>
+    <div>Study Copilot</div>
+  </div>
+
+  <div class="modes">
+    <div class="mode" onclick="setMode('explain')">📘 Explain</div>
+    <div class="mode" onclick="setMode('quiz')">🧪 Quiz</div>
+    <div class="mode" onclick="setMode('flashcard')">🧠 Flashcards</div>
+    <div class="mode" onclick="setMode('exam')">🎯 Exam</div>
   </div>
 
   <div class="chatWrapper">
@@ -295,7 +248,7 @@
       <div id="chat"></div>
 
       <div class="inputArea">
-        <input id="input" placeholder="Ask anything..." />
+        <input id="input" placeholder="Ask Skilio..." />
         <button onclick="send()">Send</button>
       </div>
 
@@ -305,9 +258,15 @@
 </div>
 
 <script>
+let mode = "normal";
+
 function start() {
   document.getElementById("landing").style.display = "none";
   document.getElementById("chatPage").style.display = "flex";
+}
+
+function setMode(m) {
+  mode = m;
 }
 
 async function send() {
@@ -317,7 +276,6 @@ async function send() {
   if (!text) return;
 
   chat.innerHTML += `<div class="msg user">You: ${text}</div>`;
-
   document.getElementById("input").value = "";
 
   let typingId = "t" + Date.now();
@@ -326,13 +284,12 @@ async function send() {
   const res = await fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: text })
+    body: JSON.stringify({ message: text, mode })
   });
 
   const data = await res.json();
 
-  document.getElementById(typingId).innerHTML =
-    "Skilio: " + data.reply;
+  document.getElementById(typingId).innerHTML = "Skilio: " + data.reply;
 
   chat.scrollTop = chat.scrollHeight;
 }
