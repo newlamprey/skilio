@@ -1,50 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Skilio</title>
+  <title>Skilio AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    :root {
+      --bg: #0b0f1a;
+      --panel: #111827;
+      --panel2: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --primary: #7c3aed;
+      --primary2: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial;
-      background: #0b0f1a;
-      color: white;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #111827, var(--bg));
+      color: var(--text);
     }
 
     /* LANDING */
     .hero {
       text-align: center;
-      padding: 100px 20px;
+      padding: 120px 20px 60px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--primary2);
+      font-size: 12px;
+      margin-bottom: 15px;
     }
 
     h1 {
-      font-size: 50px;
-      color: #7c3aed;
-      margin-bottom: 10px;
+      font-size: 56px;
+      margin: 10px 0;
+      background: linear-gradient(90deg, #7c3aed, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    p {
-      opacity: 0.8;
-      font-size: 18px;
+    .subtitle {
       max-width: 600px;
-      margin: 10px auto;
+      margin: auto;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
     }
 
     .btn {
-      margin-top: 20px;
-      padding: 12px 20px;
-      background: #7c3aed;
+      margin-top: 25px;
+      padding: 14px 22px;
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
       border: none;
       color: white;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
     }
 
     /* PRICING */
     .pricing {
+      padding: 60px 20px;
       text-align: center;
-      padding: 40px 20px;
+    }
+
+    .pricing h2 {
+      color: var(--text);
+      margin-bottom: 20px;
     }
 
     .cards {
@@ -52,122 +90,171 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      margin-top: 20px;
     }
 
     .card {
-      background: #111827;
+      background: var(--panel);
       padding: 20px;
-      border-radius: 12px;
-      width: 220px;
+      border-radius: 16px;
+      width: 240px;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
-    .card.pro {
-      border: 1px solid #7c3aed;
-      background: #1f2937;
+    .card h3 {
+      margin-bottom: 10px;
+      color: var(--primary2);
     }
 
-    /* CHAT PAGE */
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pro {
+      border: 1px solid rgba(124,58,237,0.5);
+      transform: scale(1.05);
+    }
+
+    /* CHAT */
     #chatPage {
       display: none;
       height: 100vh;
       flex-direction: column;
+      background: var(--bg);
+    }
+
+    .topbar {
+      padding: 15px 20px;
+      background: var(--panel);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      color: var(--primary2);
+    }
+
+    .chatContainer {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
     }
 
     .chatBox {
-      flex: 1;
-      padding: 20px;
+      width: 100%;
+      max-width: 800px;
       display: flex;
       flex-direction: column;
     }
 
     #chat {
       flex: 1;
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 15px;
       overflow-y: auto;
-      background: #111827;
-      padding: 10px;
-      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
     .msg {
-      margin: 8px 0;
+      margin: 10px 0;
+      line-height: 1.4;
     }
 
-    .user { color: #60a5fa; }
-    .ai { color: #a78bfa; }
+    .user {
+      color: #60a5fa;
+    }
 
-    .input {
+    .ai {
+      color: #c084fc;
+    }
+
+    .inputArea {
       display: flex;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     input {
       flex: 1;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 14px;
+      border-radius: 12px;
       border: none;
       outline: none;
+      background: var(--panel2);
+      color: white;
     }
 
     button {
-      margin-left: 8px;
-      padding: 12px;
-      background: #7c3aed;
+      margin-left: 10px;
+      padding: 14px 18px;
+      border-radius: 12px;
       border: none;
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
       color: white;
-      border-radius: 8px;
       cursor: pointer;
     }
+
   </style>
 </head>
 
 <body>
 
-<!-- LANDING PAGE -->
+<!-- LANDING -->
 <div id="landing">
 
   <div class="hero">
-    <h1>Skilio 🚀</h1>
-    <p>AI Study & Career Copilot for Students</p>
-    <p>Learn faster, revise smarter, and plan your future with AI-powered guidance.</p>
-    <button class="btn" onclick="start()">Start Learning Free</button>
+    <div class="badge">AI Study & Career Copilot</div>
+    <h1>Skilio</h1>
+    <p class="subtitle">
+      Your intelligent study companion that helps you learn faster, revise smarter, and plan your future with AI-powered guidance.
+    </p>
+    <button class="btn" onclick="start()">Start Learning</button>
   </div>
 
   <div class="pricing">
-    <h2 style="color:#7c3aed;">Pricing</h2>
+    <h2>Simple Pricing</h2>
 
     <div class="cards">
       <div class="card">
         <h3>Free</h3>
-        <p>Basic AI Study Help</p>
-        <p>✔ Chat AI<br>✔ Study Modes</p>
+        <p>Basic AI help + study modes</p>
       </div>
 
       <div class="card pro">
         <h3>Pro</h3>
-        <p>$4.99 / month</p>
-        <p>✔ Advanced AI<br>✔ Exam Mode<br>✔ Flashcards</p>
+        <p>Advanced AI + exam tools</p>
       </div>
 
       <div class="card">
         <h3>Premium</h3>
-        <p>$7.99 / month</p>
-        <p>✔ Everything<br>✔ Career AI<br>✔ Priority Features</p>
+        <p>Full AI + career assistant</p>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- CHAT PAGE -->
+<!-- CHAT -->
 <div id="chatPage">
 
-  <div class="chatBox">
-    <div id="chat"></div>
+  <div class="topbar">
+    <div class="logo">Skilio</div>
+    <div>AI Study Copilot</div>
+  </div>
 
-    <div class="input">
-      <input id="input" placeholder="Ask Skilio..." />
-      <button onclick="send()">Send</button>
+  <div class="chatContainer">
+    <div class="chatBox">
+
+      <div id="chat"></div>
+
+      <div class="inputArea">
+        <input id="input" placeholder="Ask anything..." />
+        <button onclick="send()">Send</button>
+      </div>
+
     </div>
   </div>
 
@@ -189,11 +276,11 @@ async function send() {
 
   document.getElementById("input").value = "";
 
+  chat.innerHTML += `<div class="msg ai">Skilio: thinking...</div>`;
+
   const res = await fetch("/api/chat", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message: text })
   });
 
