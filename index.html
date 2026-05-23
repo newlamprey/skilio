@@ -20,11 +20,14 @@
     h1 {
       font-size: 50px;
       color: #7c3aed;
+      margin-bottom: 10px;
     }
 
     p {
       opacity: 0.8;
       font-size: 18px;
+      max-width: 600px;
+      margin: 10px auto;
     }
 
     .btn {
@@ -38,6 +41,32 @@
       font-size: 16px;
     }
 
+    /* PRICING */
+    .pricing {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #111827;
+      padding: 20px;
+      border-radius: 12px;
+      width: 220px;
+    }
+
+    .card.pro {
+      border: 1px solid #7c3aed;
+      background: #1f2937;
+    }
+
     /* CHAT PAGE */
     #chatPage {
       display: none;
@@ -48,17 +77,22 @@
     .chatBox {
       flex: 1;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
     }
 
     #chat {
-      height: 70vh;
+      flex: 1;
       overflow-y: auto;
       background: #111827;
       padding: 10px;
       border-radius: 10px;
     }
 
-    .msg { margin: 8px 0; }
+    .msg {
+      margin: 8px 0;
+    }
+
     .user { color: #60a5fa; }
     .ai { color: #a78bfa; }
 
@@ -72,6 +106,7 @@
       padding: 12px;
       border-radius: 8px;
       border: none;
+      outline: none;
     }
 
     button {
@@ -90,11 +125,38 @@
 
 <!-- LANDING PAGE -->
 <div id="landing">
+
   <div class="hero">
     <h1>Skilio 🚀</h1>
-    <p>Your AI Study & Career Copilot</p>
-    <button class="btn" onclick="start()">Start Learning</button>
+    <p>AI Study & Career Copilot for Students</p>
+    <p>Learn faster, revise smarter, and plan your future with AI-powered guidance.</p>
+    <button class="btn" onclick="start()">Start Learning Free</button>
   </div>
+
+  <div class="pricing">
+    <h2 style="color:#7c3aed;">Pricing</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Free</h3>
+        <p>Basic AI Study Help</p>
+        <p>✔ Chat AI<br>✔ Study Modes</p>
+      </div>
+
+      <div class="card pro">
+        <h3>Pro</h3>
+        <p>$4.99 / month</p>
+        <p>✔ Advanced AI<br>✔ Exam Mode<br>✔ Flashcards</p>
+      </div>
+
+      <div class="card">
+        <h3>Premium</h3>
+        <p>$7.99 / month</p>
+        <p>✔ Everything<br>✔ Career AI<br>✔ Priority Features</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- CHAT PAGE -->
@@ -125,15 +187,20 @@ async function send() {
 
   chat.innerHTML += `<div class="msg user">You: ${text}</div>`;
 
+  document.getElementById("input").value = "";
+
   const res = await fetch("/api/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({ message: text })
   });
 
   const data = await res.json();
 
   chat.innerHTML += `<div class="msg ai">Skilio: ${data.reply}</div>`;
+  chat.scrollTop = chat.scrollHeight;
 }
 </script>
 
